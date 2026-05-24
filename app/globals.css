@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #050505;
+  --color-carbon: #111111;
+  --color-accent: #B6FF00;
+  --color-primary-text: #F3F4F6;
+  --color-secondary-text: #9CA3AF;
+  --color-steel-gray: #A1A1A1;
+  --color-border-muted: rgba(255, 255, 255, 0.1);
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-primary-text);
+}
+
+/* Custom scrollbar for industrial feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-carbon);
+  border: 1px solid var(--color-border-muted);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Marquee Animation Keyframes */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: marquee 20s linear infinite;
+}
