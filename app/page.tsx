@@ -1,43 +1,53 @@
 import Image from 'next/image';
-import { ArrowDown, Mail, ShieldAlert, Terminal, Lock } from 'lucide-react';
+import { ArrowDown, Mail, ShieldAlert, Terminal, Lock, ChevronDown, Phone } from 'lucide-react';
 import * as motion from 'motion/react-client';
 
-const navLinks = ['TELEMETRY', 'SERVICES', 'FLEET', 'NETWORK'];
+const navLinks = ['System', 'Markets', 'Featured', 'Resources', 'About'];
 const services = [
   'GOODS TRANSPORT',
   'TANKER SERVICE',
   'BULK SUPPLY',
   'OUTSTATION DELIVERY',
 ];
-const clients = ['ADANI WILMAR', 'EMAMI', 'TATA STEEL', 'RELIANCE', 'ADANI WILMAR'];
+const clients = ['RYDER', 'PROLOGIS', 'NFI', 'LINEAGE', '8VC'];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-void flex flex-col relative overflow-hidden">
       {/* 1. Navbar */}
-      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-void/90 backdrop-blur-md border-b border-border-muted font-mono text-sm uppercase tracking-wider">
-        <div className="flex items-center gap-12">
-          <div className="text-xl font-bold tracking-tight text-accent font-display">BHAGAT_ENT</div>
-          <div className="hidden md:flex gap-8 text-secondary-text">
+      <div className="fixed top-6 left-0 right-0 w-full z-50 flex justify-center px-4 pointer-events-none">
+        <nav className="flex items-center justify-between px-4 py-3 bg-carbon/90 backdrop-blur-md rounded-xl border border-border-muted/50 font-sans text-sm tracking-wide w-full max-w-[1200px] shadow-2xl pointer-events-auto transition-transform">
+          {/* Logo */}
+          <div className="flex items-center gap-3 pr-6">
+            <div className="bg-white text-void p-1.5 rounded-md">
+              <Terminal size={20} strokeWidth={2.5} />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-white font-display">BHAGAT_ENT</span>
+          </div>
+
+          {/* Links */}
+          <div className="hidden lg:flex gap-8 text-secondary-text items-center font-medium">
             {navLinks.map((link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="hover:text-primary-text transition-colors duration-300 hover:border-b-accent hover:border-b pb-1">
-                {link}
+              <a key={link} href={`#${link.toLowerCase()}`} className="flex items-center gap-1.5 hover:text-white transition-colors duration-300">
+                {link} {link !== 'About' && <ChevronDown size={14} className="opacity-60" />}
               </a>
             ))}
           </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="hidden md:flex items-center justify-center w-8 h-8 rounded-none border border-border-muted hover:border-accent text-secondary-text hover:text-accent transition-colors">
-            <Terminal size={14} />
-          </button>
-          <button className="px-4 py-2 border border-border-muted hover:border-accent hover:text-accent transition-colors bg-white text-void font-semibold tracking-tight hover:bg-transparent">
-            SYSTEM_LOGIN
-          </button>
-          <button className="px-6 py-2 bg-accent text-void border border-accent hover:bg-void hover:text-accent transition-colors font-semibold tracking-tight">
-            CONTACT
-          </button>
-        </div>
-      </nav>
+
+          {/* Buttons */}
+          <div className="flex flex-1 lg:flex-none justify-end lg:justify-start items-center gap-3 sm:gap-4">
+            <button className="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg border border-border-muted/50 hover:border-accent text-secondary-text hover:text-white transition-colors">
+              <Phone size={18} />
+            </button>
+            <button className="px-5 sm:px-6 py-2.5 rounded-lg bg-white text-void font-bold tracking-widest hover:bg-gray-200 transition-colors uppercase text-[11px]">
+              DEMO
+            </button>
+            <button className="px-5 sm:px-6 py-2.5 rounded-lg bg-accent text-void font-bold tracking-widest hover:shadow-[0_0_15px_#B6FF00] transition-shadow border-none uppercase text-[11px]">
+              CONTACT
+            </button>
+          </div>
+        </nav>
+      </div>
 
       {/* 2. Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center pt-20">
@@ -168,20 +178,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Clients Marquee */}
-      <section className="w-full bg-white text-void py-8 overflow-hidden border-b border-border-muted relative flex items-center">
-        {/* Subtle left/right fade masks */}
-        <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10" />
-        
-        <div className="flex w-fit whitespace-nowrap animate-marquee">
-          {/* Repeat multiple times for smooth loop */}
-          {[...clients, ...clients, ...clients, ...clients].map((client, i) => (
-            <div key={i} className="flex-none px-12 text-center flex items-center justify-center">
-              <span className="font-display font-bold text-3xl md:text-4xl lg:text-5xl uppercase tracking-tighter whitespace-nowrap">
-                {client}
-              </span>
-            </div>
+      {/* 5. Clients Grid Section */}
+      <section className="w-full min-h-screen bg-void relative flex flex-col justify-center border-b border-border-muted overflow-hidden">
+        {/* Background Grid */}
+        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-5 grid-rows-[1fr_auto_1fr]">
+          
+          {/* Top Row Cells */}
+          {Array.from({ length: 5 }).map((_, i) => (
+             <div key={`top-${i}`} className="hidden md:block border-b border-r border-border-muted/30 relative">
+                <div className="absolute -bottom-[5px] -right-[5px] text-border-muted opacity-30 text-[10px] leading-none select-none pointer-events-none">+</div>
+             </div>
+          ))}
+
+          {/* Middle Row Cells (Logo Row) */}
+          {clients.map((client, i) => (
+             <div key={`mid-${i}`} className="border-b md:border-b-0 border-border-muted/30 relative md:border-b md:border-r h-48 md:h-[400px] flex items-center justify-center group cursor-pointer hover:bg-carbon/40 transition-colors duration-500">
+               {/* Foreground Logo */}
+               <span className="font-display font-medium text-3xl md:text-4xl text-secondary-text group-hover:text-primary-text transition-colors tracking-tighter uppercase px-4 text-center z-10">
+                 {client}
+               </span>
+               {/* Hover Accent Line */}
+               <div className="absolute bottom-[0px] left-0 w-full h-[2px] bg-transparent group-hover:bg-accent group-hover:shadow-[0_0_20px_#B6FF00] transition-colors duration-300 z-20" />
+               <div className="absolute -bottom-[5px] -right-[5px] text-border-muted opacity-30 text-[10px] leading-none select-none pointer-events-none z-0 hidden md:block">+</div>
+             </div>
+          ))}
+          
+          {/* Bottom Row Cells */}
+          {Array.from({ length: 5 }).map((_, i) => (
+             <div key={`bot-${i}`} className="hidden md:block border-r border-border-muted/30 relative" />
           ))}
         </div>
       </section>
