@@ -68,13 +68,13 @@ const benefits = [
 
 const GSAPPinnedBenefits = () => {
     const scrollContainerRef = useRef(null);
-    const triggersRef = useRef([]);
-    const imageRefs = useRef([]);
-    const titleBlockRefs = useRef([]);
-    const descBlockRefs = useRef([]);
-    const labelRefs = useRef([]);
-    const titleRefs = useRef([]);
-    const descRefs = useRef([]);
+    const triggersRef = useRef<Array<HTMLDivElement | null>>([]);
+    const imageRefs = useRef<Array<HTMLImageElement | null>>([]);
+    const titleBlockRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const descBlockRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const labelRefs = useRef<Array<HTMLSpanElement | null>>([]);
+    const titleRefs = useRef<Array<HTMLHeadingElement | null>>([]);
+    const descRefs = useRef<Array<HTMLParagraphElement | null>>([]);
     const progressLineRef = useRef(null);
     const numbersTextRef = useRef(null);
 
@@ -112,7 +112,7 @@ const GSAPPinnedBenefits = () => {
                 },
             });
 
-            const goToStep = (index) => {
+            const goToStep = (index: number) => {
                 if (currentStep === index) return;
 
                 const isScrollingDown = index > currentStep;
@@ -217,15 +217,21 @@ const GSAPPinnedBenefits = () => {
             className="relative h-[300vh] w-full bg-white"
         >
             <div
-                ref={(el) => (triggersRef.current[0] = el)}
+                ref={(el) => {
+                    triggersRef.current[0] = el;
+                }}
                 className="absolute top-0 h-screen w-full pointer-events-none"
             />
             <div
-                ref={(el) => (triggersRef.current[1] = el)}
+                ref={(el) => {
+                    triggersRef.current[1] = el;
+                }}
                 className="absolute top-[100vh] h-screen w-full pointer-events-none"
             />
             <div
-                ref={(el) => (triggersRef.current[2] = el)}
+                ref={(el) => {
+                    triggersRef.current[2] = el;
+                }}
                 className="absolute top-[200vh] h-screen w-full pointer-events-none"
             />
 
@@ -256,7 +262,9 @@ const GSAPPinnedBenefits = () => {
                     {benefits.map((benefit, index) => (
                         <Image
                             key={`img-${benefit.id}`}
-                            ref={(el) => (imageRefs.current[index] = el)}
+                            ref={(el) => {
+                                imageRefs.current[index] = el;
+                            }}
                             src={benefit.image}
                             alt=""
                             fill
@@ -290,9 +298,9 @@ const GSAPPinnedBenefits = () => {
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={`title-${index}`}
-                                    ref={(el) =>
-                                        (titleBlockRefs.current[index] = el)
-                                    }
+                                    ref={(el) => {
+                                        titleBlockRefs.current[index] = el;
+                                    }}
                                     className="absolute top-0 left-0 w-full h-full flex flex-col"
                                     style={{
                                         visibility:
@@ -301,9 +309,9 @@ const GSAPPinnedBenefits = () => {
                                 >
                                     <div className="overflow-hidden py-1 mb-1">
                                         <span
-                                            ref={(el) =>
-                                                (labelRefs.current[index] = el)
-                                            }
+                                            ref={(el) => {
+                                                labelRefs.current[index] = el;
+                                            }}
                                             className="block text-[#8492a6] text-2xl font-light translate-y-0"
                                         >
                                             Benefit {benefit.id}
@@ -311,9 +319,9 @@ const GSAPPinnedBenefits = () => {
                                     </div>
                                     <div className="overflow-hidden py-1">
                                         <h2
-                                            ref={(el) =>
-                                                (titleRefs.current[index] = el)
-                                            }
+                                            ref={(el) => {
+                                                titleRefs.current[index] = el;
+                                            }}
                                             className="block text-[34px] md:text-[40px] font-medium text-[#0A1B28] tracking-tight leading-[1.1] translate-y-0"
                                         >
                                             {benefit.title}
@@ -335,9 +343,9 @@ const GSAPPinnedBenefits = () => {
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={`desc-${index}`}
-                                    ref={(el) =>
-                                        (descBlockRefs.current[index] = el)
-                                    }
+                                    ref={(el) => {
+                                        descBlockRefs.current[index] = el;
+                                    }}
                                     className="absolute top-0 left-0 w-full h-full"
                                     style={{
                                         visibility:
@@ -346,9 +354,9 @@ const GSAPPinnedBenefits = () => {
                                 >
                                     <div className="overflow-hidden py-2">
                                         <p
-                                            ref={(el) =>
-                                                (descRefs.current[index] = el)
-                                            }
+                                            ref={(el) => {
+                                                descRefs.current[index] = el;
+                                            }}
                                             className="block text-[#5c6b7c] text-[17px] leading-[1.65] font-light translate-y-0"
                                         >
                                             {benefit.description}
@@ -702,7 +710,8 @@ const experiences = [
         id: '01',
         title: 'Edible Oil',
         subtitle: 'Transportation',
-        description: 'Safe and hygienic transportation solutions for edible oil manufacturers and distributors.',
+        description:
+            'Safe and hygienic transportation solutions for edible oil manufacturers and distributors.',
         image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2069&auto=format&fit=crop',
         accent: '#facc15',
     },
@@ -710,7 +719,8 @@ const experiences = [
         id: '02',
         title: 'Chemicals',
         subtitle: 'Logistics',
-        description: 'Reliable transportation handling for industrial and commercial chemical products.',
+        description:
+            'Reliable transportation handling for industrial and commercial chemical products.',
         image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop',
         accent: '#0ea5e9',
     },
@@ -718,7 +728,8 @@ const experiences = [
         id: '03',
         title: 'Resins',
         subtitle: 'Transportation',
-        description: 'Secure logistics support for resin and industrial material movement.',
+        description:
+            'Secure logistics support for resin and industrial material movement.',
         image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop',
         accent: '#7c3aed',
     },
@@ -726,7 +737,8 @@ const experiences = [
         id: '04',
         title: 'Ethanol',
         subtitle: 'Transportation',
-        description: 'Professional and compliant ethanol transportation services with safety-first operations.',
+        description:
+            'Professional and compliant ethanol transportation services with safety-first operations.',
         image: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=2070&auto=format&fit=crop',
         accent: '#10b981',
     },
