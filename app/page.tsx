@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 
 import { Navbar, Footer } from '@/components';
-import { Clients, Services, Experience } from './sections';
+import { About, Clients, Services, Experience } from './sections';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -157,6 +157,7 @@ export default function Home() {
                 </div>
             </section>
 
+            <About />
             <Services />
             <Clients />
             <Experience />
